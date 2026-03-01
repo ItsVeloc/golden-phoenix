@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Phoenix | Chinese Restaurant | Stratford-upon-Avon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ===== VARIABLES ===== */
+  :root {
+    --black: #0c0c0a;
+    --dark: #141412;
+    --charcoal: #1a1a18;
+    --charcoal-light: #222220;
+    --red: #b71c1c;
+    --red-hover: #d32f2f;
+    --red-dark: #8b1515;
+    --cream: #d4cfc4;
+    --cream-light: #e8e4da;
+    --cream-dim: #8a8680;
+    --white: #f5f3ef;
+    --serif: 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
+    --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* ===== RESET ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== UTILITY ===== */
+  .uppercase {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    transition: background 0.4s;
+  }
+  .nav.scrolled {
+    background: rgba(12, 12, 10, 0.96);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--cream-light);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+  }
+  .nav-links li a {
+    display: block;
+    padding: 20px 22px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cream);
+    transition: color 0.3s;
+    white-space: nowrap;
+  }
+  .nav-links li a:hover { color: var(--white); }
+  .nav-book-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 28px;
+    background: var(--red);
+    color: var(--white) !important;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  .nav-book-btn:hover { background: var(--red-hover); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .hero-bg-left, .hero-bg-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-left::after, .hero-bg-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 12, 10, 0.45);
+  }
+  .hero-bg-left img, .hero-bg-right img {
+    animation: slowZoom 25s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+    padding: 0 24px;
+  }
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--cream);
+    margin: 0 auto 28px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.3s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 14.5px;
+    color: var(--cream);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--cream);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    transition: all 0.35s;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .hero-cta:hover {
+    background: var(--cream-light);
+    color: var(--black);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ===== INTRO TEXT ===== */
+  .intro-text {
+    text-align: center;
+    padding: 100px 24px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .intro-text h2 {
+    font-family: var(--sans);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    line-height: 1.5;
+    margin-bottom: 28px;
+  }
+  .intro-text p {
+    font-size: 14.5px;
+    color: var(--cream-dim);
+    line-height: 1.9;
+  }
+
+  /* ===== IMAGE TRIO ===== */
+  .image-trio {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    max-width: 860px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .image-trio .trio-img {
+    height: 280px;
+    overflow: hidden;
+  }
+  .image-trio .trio-img img {
+    transition: transform 0.6s ease;
+  }
+  .image-trio .trio-img:hover img {
+    transform: scale(1.05);
+  }
+
+  /* ===== QUOTE + BAR SPLIT ===== */
+  .quote-bar-section {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    min-height: 500px;
+  }
+  .quote-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 60px 60px 80px;
+    background: var(--black);
+  }
+  .quote-mark {
+    font-family: var(--serif);
+    font-size: 48px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .quote-attr {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .bar-side {
+    overflow: hidden;
+  }
+  .bar-side img {
+    transition: transform 8s ease;
+  }
+  .bar-side:hover img {
+    transform: scale(1.04);
+  }
+
+  /* ===== MENU FULL-BLEED ===== */
+  .menu-fullbleed {
+    position: relative;
+    height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .menu-fullbleed-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .menu-fullbleed-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 12, 10, 0.55);
+  }
+  .menu-fullbleed-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 24px;
+  }
+  .menu-fullbleed-content h2 {
+    font-family: var(--sans);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .menu-fullbleed-content p {
+    font-size: 14px;
+    color: var(--cream);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: 13px 36px;
+    border: 1px solid var(--cream);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    transition: all 0.35s;
+  }
+  .btn-outline:hover {
+    background: var(--cream-light);
+    color: var(--black);
+  }
+
+  /* ===== ALTERNATING BLOCKS ===== */
+  .alt-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+  }
+  .alt-block.reverse .alt-image { order: 2; }
+  .alt-block.reverse .alt-content { order: 1; }
+  .alt-image {
+    overflow: hidden;
+  }
+  .alt-image img {
+    transition: transform 0.8s ease;
+  }
+  .alt-image:hover img {
+    transform: scale(1.04);
+  }
+  .alt-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 48px;
+    background: var(--black);
+  }
+  .alt-content h2 {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    line-height: 1.4;
+    margin-bottom: 20px;
+    max-width: 400px;
+  }
+  .alt-content p {
+    font-size: 14px;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    max-width: 380px;
+  }
+
+  /* ===== RESERVATION CTA ===== */
+  .reservation-section {
+    text-align: center;
+    padding: 80px 24px;
+    background: var(--black);
+  }
+  .reservation-section h2 {
+    font-family: var(--sans);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    margin-bottom: 20px;
+  }
+  .reservation-section p {
+    font-size: 14px;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 48px 30px;
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-heading {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+  .footer-map {
+    width: 100%;
+    height: 120px;
+    background: var(--charcoal);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .footer-map-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 20px;
+    height: 28px;
+  }
+  .footer-map-pin svg { fill: var(--cream-light); }
+  .footer-address {
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    line-height: 1.7;
+  }
+  .footer-address a {
+    color: var(--cream-dim);
+    transition: color 0.3s;
+  }
+  .footer-address a:hover { color: var(--cream-light); }
+  .footer-hours dt {
+    font-size: 12px;
+    color: var(--cream-light);
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  .footer-hours dt:first-child { margin-top: 0; }
+  .footer-hours dd {
+    font-size: 12px;
+    color: var(--cream-dim);
+  }
+  .footer-links {
+    list-style: none;
+  }
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  .footer-links a {
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--cream-light); }
+
+  /* Newsletter */
+  .newsletter-desc {
+    font-size: 12px;
+    color: var(--cream-dim);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .newsletter-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    font-size: 12px;
+    font-family: var(--sans);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .newsletter-input:focus { border-color: rgba(255,255,255,0.25); }
+  .newsletter-input::placeholder { color: var(--cream-dim); }
+  .newsletter-email {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    font-size: 12px;
+    font-family: var(--sans);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+  }
+  .newsletter-email:focus { border-color: rgba(255,255,255,0.25); }
+  .newsletter-email::placeholder { color: var(--cream-dim); }
+  .newsletter-btn {
+    width: 100%;
+    padding: 10px;
+    background: var(--red);
+    border: none;
+    color: var(--white);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .newsletter-btn:hover { background: var(--red-hover); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--cream-dim);
+  }
+  .footer-bottom a {
+    color: var(--cream-dim);
+    transition: color 0.3s;
+  }
+  .footer-bottom a:hover { color: var(--cream-light); }
+
+  /* ===== SOCIAL SIDEBAR ===== */
+  .social-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+  }
+  .social-sidebar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 16px;
+    transition: background 0.3s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .social-sidebar a:hover { background: var(--red-hover); }
+  .social-sidebar svg { width: 18px; height: 18px; fill: var(--white); }
+
+  /* ===== MOBILE BAR ===== */
+  .mobile-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(12, 12, 10, 0.97);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    z-index: 1000;
+    padding: 10px 0 8px;
+  }
+  .mobile-bar-inner {
+    display: flex;
+    justify-content: space-around;
+  }
+  .mobile-bar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--cream-dim);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .mobile-bar a svg { width: 20px; height: 20px; fill: currentColor; }
+  .mobile-bar a.active { color: var(--red); }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .nav-links li a { padding: 20px 14px; font-size: 10px; }
+    .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav { justify-content: flex-start; }
+    .nav-links { display: none; }
+    .nav-logo { position: relative; left: 20px; transform: none; }
+    .nav-book-btn { padding: 0 20px; font-size: 10px; }
+
+    .hero-bg { grid-template-columns: 1fr; }
+    .hero-bg-right { display: none; }
+
+    .image-trio { grid-template-columns: 1fr; gap: 4px; }
+    .image-trio .trio-img { height: 220px; }
+
+    .quote-bar-section { grid-template-columns: 1fr; }
+    .quote-side { padding: 48px 24px; }
+    .bar-side { height: 300px; }
+
+    .menu-fullbleed { height: 420px; }
+
+    .alt-block { grid-template-columns: 1fr; }
+    .alt-block.reverse .alt-image { order: 1; }
+    .alt-block.reverse .alt-content { order: 2; }
+    .alt-image { height: 300px; }
+    .alt-content { padding: 40px 24px; }
+
+    .footer { padding: 40px 24px 20px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+    .social-sidebar { display: none; }
+    .mobile-bar { display: block; }
+    body { padding-bottom: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-text">Golden<br>Phoenix</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menus</a></li>
+    <li><a href="#events">What's On</a></li>
+    <li><a href="#brunch">Weekend Brunch</a></li>
+    <li><a href="#private">Private Dining &amp; Events</a></li>
+    <li><a href="#">Gift Vouchers</a></li>
+  </ul>
+  <a href="#book" class="nav-book-btn">Book Now</a>
+</nav>
+
+<!-- SOCIAL SIDEBAR -->
+<div class="social-sidebar">
+  <a href="#" aria-label="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+  </a>
+  <a href="#" aria-label="Facebook">
+    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-bg-left">
+      <img src="images/hero.jpg" alt="Golden Phoenix restaurant">
+    </div>
+    <div class="hero-bg-right">
+      <img src="images/interior.jpg" alt="Restaurant interior">
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-rule"></div>
+    <h1>Golden Phoenix,<br>Stratford-upon-Avon</h1>
+    <p class="hero-desc">
+      Authentic Chinese restaurant in Stratford-upon-Avon featuring aromatic Northern cuisine and traditional flavours in the heart of Shakespeare country.
+    </p>
+    <a href="#book" class="hero-cta">Make a Reservation</a>
+  </div>
+</section>
+
+<!-- INTRO TEXT -->
+<div class="intro-text reveal">
+  <h2>Authentic Chinese Cuisine | Lunch &amp; Dinner</h2>
+  <p>
+    In the heart of Stratford-upon-Avon, Golden Phoenix serves aromatic Chinese dishes crafted with traditional techniques and the finest ingredients. Join us for lunch or dinner to experience the authentic taste of Northern China.
+  </p>
+</div>
+
+<!-- IMAGE TRIO -->
+<div class="image-trio">
+  <div class="trio-img reveal"><img src="images/cocktail.jpg" alt="Cocktails"></div>
+  <div class="trio-img reveal"><img src="images/food.jpg" alt="Signature dishes"></div>
+  <div class="trio-img reveal"><img src="images/interior.jpg" alt="Interior"></div>
+</div>
+
+<!-- QUOTE + BAR SPLIT -->
+<div class="quote-bar-section reveal">
+  <div class="quote-side">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">
+      An extraordinary dining experience. The flavours transport you straight to Beijing, yet the warmth and welcome are unmistakably Stratford.
+    </p>
+    <p class="quote-attr">Placeholder Review</p>
+  </div>
+  <div class="bar-side">
+    <img src="images/bar.jpg" alt="Bar interior">
+  </div>
+</div>
+
+<!-- MENU FULL-BLEED -->
+<div class="menu-fullbleed reveal" id="menu">
+  <div class="menu-fullbleed-bg">
+    <img src="images/menu_hero.jpg" alt="Our dishes">
+  </div>
+  <div class="menu-fullbleed-content">
+    <h2>Menus</h2>
+    <p>
+      Discover Golden Phoenix's Chinese cuisine, from our signature crispy aromatic duck to fiery Sichuan classics. Enjoy it all at one of the most celebrated restaurants in Stratford-upon-Avon.
+    </p>
+    <a href="#" class="btn-outline">View All</a>
+  </div>
+</div>
+
+<!-- WEEKEND BRUNCH -->
+<div class="alt-block" id="brunch">
+  <div class="alt-image reveal">
+    <img src="images/brunch.jpg" alt="Weekend dining">
+  </div>
+  <div class="alt-content">
+    <h2>Weekend Banquet Menu</h2>
+    <p>
+      Enjoy an unforgettable weekend dining experience. Our special banquet menu pairs Northern Chinese cuisine with carefully selected drinks.
+    </p>
+    <a href="#" class="btn-outline">Learn More</a>
+  </div>
+</div>
+
+<!-- WHAT'S ON -->
+<div class="alt-block reverse" id="events">
+  <div class="alt-image reveal">
+    <img src="images/private_dining.jpg" alt="What's on">
+  </div>
+  <div class="alt-content">
+    <h2>What's On</h2>
+    <p>
+      Whether you're joining us for a weekday lunch or celebrating a special occasion — there's something to suit all occasions at Golden Phoenix.
+    </p>
+    <a href="#" class="btn-outline">Learn More</a>
+  </div>
+</div>
+
+<!-- PRIVATE DINING -->
+<div class="alt-block" id="private">
+  <div class="alt-image reveal">
+    <img src="images/private_dining.jpg" alt="Private dining">
+  </div>
+  <div class="alt-content">
+    <h2>Private Dining &amp; Events</h2>
+    <p>
+      Host your next gathering at Golden Phoenix. Our intimate dining space provides a sophisticated backdrop for celebrations, business lunches, and private dining experiences.
+    </p>
+    <a href="#" class="btn-outline">Learn More</a>
+  </div>
+</div>
+
+<!-- GIFT EXPERIENCES -->
+<div class="alt-block reverse">
+  <div class="alt-image reveal">
+    <img src="images/voucher.jpg" alt="Gift vouchers">
+  </div>
+  <div class="alt-content">
+    <h2>Gift Experiences</h2>
+    <p>
+      Give the gift of exceptional dining. Our gift vouchers offer an unforgettable experience of Chinese cuisine. The perfect present for any special occasion.
+    </p>
+    <a href="#" class="btn-outline">Discover Gifts</a>
+  </div>
+</div>
+
+<!-- RESERVATION CTA -->
+<div class="reservation-section" id="book">
+  <h2 class="reveal">Make a Reservation</h2>
+  <p class="reveal">
+    Our restaurant is open daily for lunch and dinner. Come and see why Golden Phoenix is one of the most exciting places to eat in Stratford-upon-Avon.
+  </p>
+  <a href="#" class="btn-outline reveal">Book Now</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <!-- Location -->
+    <div>
+      <h4 class="footer-heading">Location</h4>
+      <div class="footer-map">
+        <img src="images/map.jpg" alt="Map">
+        <div class="footer-map-pin">
+          <svg viewBox="0 0 24 24"><path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="white"/></svg>
+        </div>
+      </div>
+      <p class="footer-address">
+        [Street Address]<br>
+        Stratford-upon-Avon<br>
+        Warwickshire<br>
+        <a href="tel:+441234567890">01234 567 890</a><br>
+        <a href="mailto:hello@goldenphoenixstratford.com">hello@goldenphoenixstratford.com</a>
+      </p>
+    </div>
+
+    <!-- Opening Hours -->
+    <div>
+      <h4 class="footer-heading">Opening Hours</h4>
+      <dl class="footer-hours">
+        <dt>Lunch</dt>
+        <dd>Monday – Sunday</dd>
+        <dd>12:00pm – 3:00pm</dd>
+        <dt>Dinner</dt>
+        <dd>Monday – Sunday</dd>
+        <dd>5:00pm – 10:30pm</dd>
+      </dl>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="footer-heading">Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#">Restaurant</a></li>
+        <li><a href="#">Menus</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Information -->
+    <div>
+      <h4 class="footer-heading">Information</h4>
+      <ul class="footer-links">
+        <li><a href="#">Allergen Info</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h4 class="footer-heading">Newsletter Signup</h4>
+      <p class="newsletter-desc">Be the first to hear about special events and seasonal menus.</p>
+      <div class="newsletter-row">
+        <input type="text" class="newsletter-input" placeholder="First name *">
+        <input type="text" class="newsletter-input" placeholder="Last name *">
+      </div>
+      <input type="email" class="newsletter-email" placeholder="Enter your email *">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Golden Phoenix Stratford. All rights reserved.</span>
+    <a href="#">Maintained by [Your Name]</a>
+  </div>
+</footer>
+
+<!-- MOBILE BAR -->
+<div class="mobile-bar">
+  <div class="mobile-bar-inner">
+    <a href="tel:+441234567890">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      Call
+    </a>
+    <a href="#book" class="active">
+      <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+      Book
+    </a>
+    <a href="#contact">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Directions
+    </a>
+    <a href="#menu">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      Menus
+    </a>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
