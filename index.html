@@ -305,12 +305,13 @@
   /* ===== MENU FULL-BLEED ===== */
   .menu-fullbleed {
     position: relative;
-    height: 550px;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
+    padding: 60px 0;
   }
   .menu-fullbleed-bg {
     position: absolute;
@@ -325,7 +326,7 @@
   .menu-fullbleed-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
+    max-width: 700px;
     padding: 0 24px;
   }
   .menu-fullbleed-content h2 {
@@ -627,6 +628,77 @@
   .mobile-bar a svg { width: 20px; height: 20px; fill: currentColor; }
   .mobile-bar a.active { color: var(--red); }
 
+  /* ===== MENU DOWNLOAD CARDS ===== */
+  .menu-download-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .menu-download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 32px;
+    border: 1px solid rgba(212,207,196,0.25);
+    background: rgba(12,12,10,0.5);
+    backdrop-filter: blur(6px);
+    transition: all 0.35s;
+    min-width: 200px;
+  }
+  .menu-download-card:hover {
+    border-color: var(--cream);
+    background: rgba(212,207,196,0.08);
+  }
+  .menu-download-card svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--cream);
+    opacity: 0.7;
+  }
+  .menu-download-card .card-title {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cream-light);
+    font-weight: 400;
+    text-align: center;
+  }
+  .menu-download-card .card-desc {
+    font-size: 12px;
+    color: var(--cream-dim);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .menu-download-card .card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border: 1px solid var(--cream-dim);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-family: var(--sans);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .menu-download-card .card-btn:hover {
+    background: var(--cream-light);
+    color: var(--black);
+    border-color: var(--cream-light);
+  }
+  .menu-download-card .card-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    opacity: 1;
+  }
+
   /* ===== SCROLL REVEAL ===== */
   .reveal {
     opacity: 0;
@@ -660,7 +732,9 @@
     .quote-side { padding: 48px 24px; }
     .bar-side { height: 300px; }
 
-    .menu-fullbleed { height: 420px; }
+    .menu-fullbleed { min-height: auto; padding: 48px 0; }
+    .menu-download-cards { flex-direction: column; align-items: center; }
+    .menu-download-card { min-width: 260px; }
 
     .alt-block { grid-template-columns: 1fr; }
     .alt-block.reverse .alt-image { order: 1; }
@@ -696,11 +770,8 @@
 
 <!-- SOCIAL SIDEBAR -->
 <div class="social-sidebar">
-  <a href="#" aria-label="Instagram">
+  <a href="https://www.instagram.com/goldenphoenixrestaurant22" target="_blank" rel="noopener" aria-label="Instagram">
     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-  </a>
-  <a href="#" aria-label="Facebook">
-    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
   </a>
 </div>
 
@@ -718,7 +789,7 @@
     <div class="hero-rule"></div>
     <h1>Golden Phoenix,<br>Stratford-upon-Avon</h1>
     <p class="hero-desc">
-      Authentic Chinese restaurant in Stratford-upon-Avon featuring aromatic Northern cuisine and traditional flavours in the heart of Shakespeare country.
+      Authentic Cantonese cuisine in the heart of Stratford-upon-Avon. Traditional flavours crafted with care at 22a Bell Court.
     </p>
     <a href="#book" class="hero-cta">Make a Reservation</a>
   </div>
@@ -726,9 +797,9 @@
 
 <!-- INTRO TEXT -->
 <div class="intro-text reveal">
-  <h2>Authentic Chinese Cuisine | Lunch &amp; Dinner</h2>
+  <h2>Cantonese Cuisine | Lunch &amp; Dinner</h2>
   <p>
-    In the heart of Stratford-upon-Avon, Golden Phoenix serves aromatic Chinese dishes crafted with traditional techniques and the finest ingredients. Join us for lunch or dinner to experience the authentic taste of Northern China.
+    In the heart of Stratford-upon-Avon, Golden Phoenix serves authentic Cantonese dishes crafted with traditional techniques and the finest ingredients. From our celebrated Peking duck to fiery Sichuan classics, join us for lunch or dinner.
   </p>
 </div>
 
@@ -736,7 +807,7 @@
 <div class="image-trio">
   <div class="trio-img reveal"><img src="images/cocktail.jpg" alt="Cocktails"></div>
   <div class="trio-img reveal"><img src="images/food.jpg" alt="Signature dishes"></div>
-  <div class="trio-img reveal"><img src="images/interior.jpg" alt="Interior"></div>
+  <div class="trio-img reveal"><img src="images/interior2.jpg" alt="Interior"></div>
 </div>
 
 <!-- QUOTE + BAR SPLIT -->
@@ -761,9 +832,28 @@
   <div class="menu-fullbleed-content">
     <h2>Menus</h2>
     <p>
-      Discover Golden Phoenix's Chinese cuisine, from our signature crispy aromatic duck to fiery Sichuan classics. Enjoy it all at one of the most celebrated restaurants in Stratford-upon-Avon.
+      From our celebrated Peking duck &mdash; air-dried for 24 hours and lacquered to perfection &mdash; to aromatic Cantonese roasts and fiery Sichuan classics. Download a menu below.
     </p>
-    <a href="#" class="btn-outline">View All</a>
+    <div class="menu-download-cards">
+      <div class="menu-download-card">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+        <span class="card-title">Main Menu</span>
+        <span class="card-desc">Full menu with appetisers, mains, noodles, rice, drinks &amp; desserts</span>
+        <a href="Media/F21 Menu1.pdf" download class="card-btn">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="menu-download-card">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+        <span class="card-title">Cantonese Menu</span>
+        <span class="card-desc">Authentic Cantonese dishes with bilingual Chinese &amp; English descriptions</span>
+        <a href="Media/F23 Menu1Cantonese.pdf" download class="card-btn">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -798,7 +888,7 @@
 <!-- PRIVATE DINING -->
 <div class="alt-block" id="private">
   <div class="alt-image reveal">
-    <img src="images/private_dining.jpg" alt="Private dining">
+    <img src="images/private_dining2.jpg" alt="Private dining">
   </div>
   <div class="alt-content">
     <h2>Private Dining &amp; Events</h2>
@@ -845,11 +935,11 @@
         </div>
       </div>
       <p class="footer-address">
-        [Street Address]<br>
+        22a Bell Court<br>
         Stratford-upon-Avon<br>
-        Warwickshire<br>
-        <a href="tel:+441234567890">01234 567 890</a><br>
-        <a href="mailto:hello@goldenphoenixstratford.com">hello@goldenphoenixstratford.com</a>
+        CV37 6EX<br>
+        <a href="tel:+441789638731">01789 638 731</a><br>
+        <a href="mailto:goldenphoenix22@yahoo.com">goldenphoenix22@yahoo.com</a>
       </p>
     </div>
 
@@ -909,7 +999,7 @@
 <!-- MOBILE BAR -->
 <div class="mobile-bar">
   <div class="mobile-bar-inner">
-    <a href="tel:+441234567890">
+    <a href="tel:+441789638731">
       <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
       Call
     </a>
