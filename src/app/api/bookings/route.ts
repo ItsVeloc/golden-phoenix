@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { assignTable } from '@/lib/availability';
-import { resend } from '@/lib/resend';
+import { getResend } from '@/lib/resend';
 import { bookingConfirmationEmail } from '@/lib/email-templates';
 import { verifySession } from '@/lib/auth';
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
       id: booking.id,
     });
 
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'Golden Phoenix <bookings@goldenphoenixstratford.com>',
       to: customerEmail,
       subject: email.subject,
